@@ -3,6 +3,7 @@ package com.pointo.movies.util
 import android.content.Context
 import android.text.Editable
 import android.text.TextWatcher
+import android.view.View
 import android.widget.EditText
 import android.widget.Toast
 import androidx.annotation.CheckResult
@@ -19,6 +20,8 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.launch
+import java.text.SimpleDateFormat
+import java.util.*
 
 operator fun <T> MutableLiveData<MutableList<T>>.plusAssign(values: List<T>) {
     val value = this.value ?: arrayListOf()
@@ -79,6 +82,16 @@ fun <T, K, R> LiveData<T>.combineWith(
 
 val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = datastoreName)
 
+fun View.hide() {
+    if (visibility != View.GONE)
+        visibility = View.GONE
+}
+
+fun View.show() {
+    if (visibility != View.VISIBLE)
+        visibility = View.VISIBLE
+}
+
 fun Fragment.shortToast(text: String) {
     if (text.isNotBlank())
         Toast.makeText(requireContext(), text, Toast.LENGTH_SHORT).show()
@@ -102,3 +115,5 @@ fun EditText.textChanges(): Flow<CharSequence?> {
     }.onStart { emit(text) }
 }
 
+fun Date.format(pattern: String, locale: Locale = Locale.getDefault()): String =
+    SimpleDateFormat(pattern, locale).format(this)

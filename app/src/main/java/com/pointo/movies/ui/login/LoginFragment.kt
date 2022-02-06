@@ -6,8 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.pointo.movies.R
 import com.pointo.movies.databinding.FragmentLoginBinding
+import com.pointo.movies.ui.MainActivity
 import com.pointo.movies.util.observeInLifecycle
 import com.pointo.movies.util.shortToast
 import com.skydoves.bindables.BindingFragment
@@ -43,13 +45,21 @@ class LoginFragment : BindingFragment<FragmentLoginBinding>(R.layout.fragment_lo
         }
 
         binding.fragmentLoginBtnLoginWebsite.setOnClickListener {
-            shortToast("To be implemented!")
+            with(vm) {
+                email.set(getString(R.string.dummy_email))
+                saveLoginInfoToDatabase()
+            }
         }
 
         vm.eventsFlow.onEach {
             when (it) {
                 is LoginViewModel.Event.NavigateToChat -> {
-                    shortToast("To be implemented!")
+                    val email = binding.fragmentLoginEtEmail.text.toString()
+                    (activity as MainActivity).openHomePage(email)
+                    findNavController().navigate(
+                        LoginFragmentDirections.actionLoginFragmentToSearchFragment(email)
+                    )
+                    shortToast("Welcome $email")
                 }
                 is LoginViewModel.Event.ShowPasswordNoUppercaseError -> {
                     binding.fragmentLoginTilPassword.error =

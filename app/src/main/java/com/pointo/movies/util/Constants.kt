@@ -9,6 +9,8 @@ object Constants {
 
     const val datastoreName = "datastore"
 
+    const val argKeyEmail = "email"
+
     val datastoreKeyUsername = stringPreferencesKey("email")
     val datastoreKeyTime = longPreferencesKey("time")
 
