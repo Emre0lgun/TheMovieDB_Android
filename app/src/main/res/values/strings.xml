@@ -10,11 +10,17 @@
     <string name="login_button_website">Login via Website</string>
     <string name="login_info">This product uses TMDb API but it is not endorsed or certified by TMDb</string>
 
+    <string name="search">Search</string>
+
+    <string name="error_no_movie_found">No Movie Found :(</string>
+
     <string name="error_login_password_uppercase">The password must include an uppercase character</string>
     <string name="error_login_password_length">The password must be 6 character</string>
     <string name="error_login_password_digit">The password must include a digit</string>
     <string name="error_login_no_email">The email is not valid</string>
+    <string name="error_text_empty">Search to find best movies!</string>
 
     <string name="dummy_email">dummy@gmail.com</string>
+    <string name="dummy_movie_title">Spider-Man: No Way Home (2021)</string>
 
 </resources>

@@ -1,6 +1,9 @@
 package com.pointo.movies.util
 
 import android.content.Context
+import android.net.ConnectivityManager
+import android.net.NetworkCapabilities
+import android.os.Build
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
@@ -12,6 +15,8 @@ import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.*
+import com.pointo.movies.data.models.Movie
+import com.pointo.movies.data.models.SimpleMovieModel
 import com.pointo.movies.util.Constants.datastoreName
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.Job
@@ -115,5 +120,52 @@ fun EditText.textChanges(): Flow<CharSequence?> {
     }.onStart { emit(text) }
 }
 
+
+fun SimpleMovieModel.toMovieModel(): Movie {
+    return Movie(
+        adult = false,
+        backdrop_path = null,
+        genre_ids = listOf(),
+        id = this.id,
+        original_language = "",
+        original_title = "",
+        overview = "",
+        popularity = 0.0,
+        poster_path = poster_path,
+        release_date = null,
+        title = this.title,
+        video = false,
+        vote_average = 0.0,
+        vote_count = 0
+    )
+}
+
+
+fun String.toDate(pattern: String, locale: Locale = Locale.getDefault()): Date? =
+    SimpleDateFormat(pattern, locale).parse(this)
+
 fun Date.format(pattern: String, locale: Locale = Locale.getDefault()): String =
     SimpleDateFormat(pattern, locale).format(this)
+
+
+fun Context.isConnected(): Boolean {
+    val connectivityManager =
+        this.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+    return when {
+        Build.VERSION.SDK_INT >= Build.VERSION_CODES.M -> {
+            val nw = connectivityManager.activeNetwork ?: return false
+            val actNw = connectivityManager.getNetworkCapabilities(nw) ?: return false
+            when {
+                actNw.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) -> true
+                actNw.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) -> true
+                else -> false
+            }
+        }
+        else -> {
+            // Use depreciated methods only on older devices
+            val nwInfo = connectivityManager.activeNetworkInfo ?: return false
+            nwInfo.isConnected
+        }
+    }
+}
+

@@ -5,11 +5,16 @@ import androidx.datastore.preferences.core.stringPreferencesKey
 
 object Constants {
 
+    const val baseUrl = "https://api.themoviedb.org/3/"
+
+    const val argKeyEmail = "email"
+
+    const val noConnectionErrorText = "There is no internet connection"
+
     const val STRING_EMPTY = ""
 
     const val datastoreName = "datastore"
-
-    const val argKeyEmail = "email"
+    const val keyCache = "movies_cache"
 
     val datastoreKeyUsername = stringPreferencesKey("email")
     val datastoreKeyTime = longPreferencesKey("time")
