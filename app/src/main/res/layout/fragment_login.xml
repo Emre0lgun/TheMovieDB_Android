@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.pointo.movies.ui.login.LoginViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/bg_gradient"
+        android:padding="@dimen/marginLarge">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/fragmentLogin_ivLogo"
+            android:layout_width="@dimen/logoSize"
+            android:layout_height="@dimen/logoSize"
+            android:src="@drawable/ic_logo"
+            android:tint="@color/white"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/fragmentLogin_tvHeader"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/marginSmall"
+            android:gravity="center"
+            android:text="@string/login_title"
+            android:textColor="@color/white"
+            android:textSize="@dimen/textSizeXLarge"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/fragmentLogin_ivLogo" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/fragmentLogin_tvInfo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/loginTitleMargin"
+            android:gravity="center"
+            android:text="@string/login_with_email"
+            android:textColor="@color/white"
+            android:textSize="@dimen/textSizeLarge"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/fragmentLogin_tvHeader" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/fragmentLogin_tilEmail"
+            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/marginSmall"
+            android:hint="@string/login_hint_email"
+            app:boxBackgroundColor="@color/turquoise"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/fragmentLogin_tvInfo">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/fragmentLogin_etEmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:imeOptions="actionNext"
+                android:inputType="text"
+                android:maxLines="1"
+                android:text="@={viewModel.email}"
+                android:textColor="@color/black" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/fragmentLogin_tilPassword"
+            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/marginSmall"
+            android:hint="@string/login_hint_password"
+            app:boxBackgroundColor="@color/turquoise"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/fragmentLogin_tilEmail"
+            app:passwordToggleEnabled="true">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/fragmentLogin_etPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:imeOptions="actionDone"
+                android:inputType="textPassword"
+                android:text="@={viewModel.password}" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/fragmentLogin_btnLogin"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/loginButtonSize"
+            android:layout_marginTop="@dimen/marginSmall"
+            android:backgroundTint="@color/colorPrimary"
+            android:imeOptions="actionSearch"
+            android:onClick="@{() -> viewModel.onLoginClicked()}"
+            android:text="@string/login_button"
+            android:textAllCaps="false"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/fragmentLogin_tilPassword" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/fragmentLogin_tvOr"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/login_text_or"
+            android:textColor="@color/white"
+            android:textSize="@dimen/textSizeLarge"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/fragmentLogin_btnLogin" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/fragmentLogin_btnLoginWebsite"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/loginButtonSize"
+            android:backgroundTint="@color/colorPrimary"
+            android:imeOptions="actionSearch"
+            android:text="@string/login_button_website"
+            android:textAllCaps="false"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/fragmentLogin_tvOr" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/fragmentLogin_ivPointo"
+            android:layout_width="@dimen/logoSize"
+            android:layout_height="wrap_content"
+            android:src="@drawable/pointo"
+            app:layout_constraintBottom_toTopOf="@id/fragmentLogin_tvCredits"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/fragmentLogin_btnLoginWebsite" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/fragmentLogin_tvCredits"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/login_info"
+            android:textColor="@color/white"
+            android:textSize="@dimen/textSizeNormal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="textSizeNormal">15sp</dimen>
+    <dimen name="textSizeLarge">18sp</dimen>
+    <dimen name="textSizeXLarge">24sp</dimen>
+
+    <dimen name="marginSmall">8dp</dimen>
+    <dimen name="marginLarge">24dp</dimen>
+
+    <dimen name="loginTitleMargin">70dp</dimen>
+    <dimen name="loginButtonSize">50dp</dimen>
+    <dimen name="logoSize">100dp</dimen>
+</resources>

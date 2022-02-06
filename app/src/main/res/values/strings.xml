@@ -1,4 +1,20 @@
 <resources>
     <string name="app_name">The Movie Manager</string>
 
+    <string name="login_with_email">Login with Email</string>
+    <string name="login_title">The Movie Manager</string>
+    <string name="login_hint_email">Email</string>
+    <string name="login_hint_password">Password</string>
+    <string name="login_button">Login</string>
+    <string name="login_text_or">OR</string>
+    <string name="login_button_website">Login via Website</string>
+    <string name="login_info">This product uses TMDb API but it is not endorsed or certified by TMDb</string>
+
+    <string name="error_login_password_uppercase">The password must include an uppercase character</string>
+    <string name="error_login_password_length">The password must be 6 character</string>
+    <string name="error_login_password_digit">The password must include a digit</string>
+    <string name="error_login_no_email">The email is not valid</string>
+
+    <string name="dummy_email">dummy@gmail.com</string>
+
 </resources>
