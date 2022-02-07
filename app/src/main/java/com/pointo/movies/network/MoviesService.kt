@@ -1,5 +1,6 @@
 package com.pointo.movies.network
 
+import com.pointo.movies.data.responses.DetailResponse
 import com.pointo.movies.data.responses.SearchResponse
 import retrofit2.Response
 import retrofit2.http.GET
@@ -13,4 +14,10 @@ interface MoviesService {
         @Query("query") query: String,
         @Query("page") page: Int
     ): Response<SearchResponse>
+
+    @GET("movie/{movieId}")
+    suspend fun detail(
+        @Path("movieId") movieId: Int
+    ): Response<DetailResponse>
+
 }

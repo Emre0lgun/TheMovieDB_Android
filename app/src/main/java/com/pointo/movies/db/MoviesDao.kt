@@ -10,4 +10,7 @@ interface MoviesDao {
 
     @Query("SELECT * FROM movies where isFavorite = 1")
     fun getFavorites(): Flow<List<SimpleMovieModel>>
+
+    @Query("SELECT * FROM movies where isWatchlist = 1")
+    fun getWatchlist(): Flow<List<SimpleMovieModel>>
 }

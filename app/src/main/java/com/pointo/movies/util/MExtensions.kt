@@ -17,6 +17,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.*
 import com.pointo.movies.data.models.Movie
 import com.pointo.movies.data.models.SimpleMovieModel
+import com.pointo.movies.data.responses.DetailResponse
 import com.pointo.movies.util.Constants.datastoreName
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.Job
@@ -121,6 +122,34 @@ fun EditText.textChanges(): Flow<CharSequence?> {
 }
 
 
+fun Movie.toMovieDetailModel(): DetailResponse {
+
+    return DetailResponse(
+        adult = this.adult,
+        backdrop_path = this.backdrop_path,
+        belongs_to_collection = null,
+        budget = null,
+        genres = null,
+        homepage = null,
+        id = this.id,
+        imdb_id = null,
+        original_language = this.original_language,
+        original_title = this.original_title,
+        overview = this.overview,
+        popularity = this.popularity,
+        poster_path = this.poster_path,
+        production_companies = null,
+        production_countries = null,
+        release_date = this.release_date,
+        revenue = null,
+        runtime = null,
+        spoken_languages = null,
+        status = null,
+        tagline = null,
+        title, video, vote_average, vote_count
+    )
+}
+
 fun SimpleMovieModel.toMovieModel(): Movie {
     return Movie(
         adult = false,
@@ -139,6 +168,17 @@ fun SimpleMovieModel.toMovieModel(): Movie {
         vote_count = 0
     )
 }
+
+fun Movie.toSimpleMovieModel(): SimpleMovieModel {
+    return SimpleMovieModel(
+        id = id,
+        title = title,
+        poster_path = poster_path,
+        isFavorite = false,
+        isWatchlist = false
+    )
+}
+
 
 fun String.toDate(pattern: String, locale: Locale = Locale.getDefault()): Date? =
     SimpleDateFormat(pattern, locale).parse(this)
