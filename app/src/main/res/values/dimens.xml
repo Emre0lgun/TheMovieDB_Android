@@ -21,4 +21,6 @@
     <dimen name="loginButtonSize">50dp</dimen>
     <dimen name="logoSize">100dp</dimen>
 
+    <dimen name="moviePosterHeight">100dp</dimen>
+    <dimen name="moviePosterWidth">70dp</dimen>
 </resources>

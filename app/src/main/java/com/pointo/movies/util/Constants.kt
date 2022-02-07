@@ -6,6 +6,7 @@ import androidx.datastore.preferences.core.stringPreferencesKey
 object Constants {
 
     const val baseUrl = "https://api.themoviedb.org/3/"
+    const val baseImageUrl = "https://image.tmdb.org/t/p/w500"
 
     const val argKeyEmail = "email"
 

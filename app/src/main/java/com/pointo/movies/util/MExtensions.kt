@@ -140,7 +140,6 @@ fun SimpleMovieModel.toMovieModel(): Movie {
     )
 }
 
-
 fun String.toDate(pattern: String, locale: Locale = Locale.getDefault()): Date? =
     SimpleDateFormat(pattern, locale).parse(this)
 
