@@ -9,6 +9,9 @@ import androidx.databinding.BindingAdapter
 import coil.load
 import com.pointo.movies.data.models.Movie
 import com.pointo.movies.util.Constants.baseImageUrl
+import com.pointo.movies.util.format
+import com.pointo.movies.util.show
+import com.pointo.movies.util.toDate
 
 
 object ViewBinding {
@@ -51,6 +54,37 @@ object ViewBinding {
             view.text = movie.title
         } else {
             view.text = "${movie.title} - ${movie.release_date.substring(0, 4)}"
+        }
+    }
+
+
+    @JvmStatic
+    @BindingAdapter("text")
+    fun bindTextWithVisibility(view: TextView, text: String?) {
+        if (text.isNullOrBlank() || text == "null" || text == "0.0") {
+            view.visibility = View.INVISIBLE
+        } else {
+            view.text = text
+            view.show()
+        }
+    }
+
+    @JvmStatic
+    @BindingAdapter("textFirstLineMargin")
+    fun bindTextWithFirstLineMargin(view: TextView, text: String?) {
+        if (text.isNullOrBlank() || text == "null" || text == "0.0") {
+            view.visibility = View.INVISIBLE
+        } else {
+            view.text = "       $text"
+            view.show()
+        }
+    }
+
+    @JvmStatic
+    @BindingAdapter("formattedDate")
+    fun bindDateWithFormatting(view: TextView, text: String?) {
+        if (!text.isNullOrBlank() && text != "null") {
+            view.text = text.toDate("yyyy-MM-dd")?.format("dd/MM/yyyy") ?: text
         }
     }
 }

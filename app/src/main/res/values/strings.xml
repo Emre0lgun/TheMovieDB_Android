@@ -12,6 +12,11 @@
 
     <string name="search">Search</string>
 
+    <string name="detail_toast_add_favorite">Added to the favorites!</string>
+    <string name="detail_toast_add_watchlist">Added to the watchlist!</string>
+    <string name="detail_toast_remove_favorite">Removed from the favorites!</string>
+    <string name="detail_toast_remove_watchlist">Removed from the watchlist!</string>
+
     <string name="error_no_movie_found">No Movie Found :(</string>
     <string name="error_no_movie_found_in_watchlist">Add some movies to the watchlist!</string>
     <string name="error_no_movie_found_in_favorites">Add some movies to the favorites!</string>
@@ -24,5 +29,8 @@
 
     <string name="dummy_email">dummy@gmail.com</string>
     <string name="dummy_movie_title">Spider-Man: No Way Home (2021)</string>
+    <string name="dummy_movie_average_point">8.8</string>
+    <string name="dummy_movie_overview">Peter Parker is unmasked and no longer able to separate his normal life from the high-stakes of being a super-hero.
+        When he asks for help from Doctor Strange the stakes become even more dangerous, forcing him to discover what it truly means to be Spider-Man.</string>
 
 </resources>

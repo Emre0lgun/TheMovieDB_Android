@@ -1,6 +1,7 @@
 package com.pointo.movies.ui
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.navigation.NavGraph
 import androidx.navigation.NavInflater
@@ -64,10 +65,15 @@ class MainActivity : BindingActivity<ActivityMainBinding>(R.layout.activity_main
     }
 
     override fun onBackPressed() {
-        if (binding.bottomNavigation.selectedItemId == R.id.searchFragment) {
-            super.onBackPressed()
+        if (navHostFragment.navController.currentDestination?.id ?: 0 == R.id.detailFragment) {
+            navHostFragment.navController.popBackStack()
+            binding.bottomNavigation.show()
         } else {
-            binding.bottomNavigation.selectedItemId = R.id.searchFragment
+            if (binding.bottomNavigation.selectedItemId == R.id.searchFragment) {
+                super.onBackPressed()
+            } else {
+                binding.bottomNavigation.selectedItemId = R.id.searchFragment
+            }
         }
     }
 
@@ -75,5 +81,18 @@ class MainActivity : BindingActivity<ActivityMainBinding>(R.layout.activity_main
         binding.bottomNavigation.setupWithNavController(findNavController(R.id.nav_host_fragment))
         binding.bottomNavigation.setOnItemReselectedListener { }
         binding.bottomNavigation.show()
+
+        val navController = findNavController(R.id.nav_host_fragment)
+
+        navController.addOnDestinationChangedListener { controller, destination, arguments ->
+            when (destination.id) {
+                R.id.detailFragment, R.id.loginFragment -> {
+                    binding.bottomNavigation.hide()
+                }
+                else -> {
+                    binding.bottomNavigation.show()
+                }
+            }
+        }
     }
 }

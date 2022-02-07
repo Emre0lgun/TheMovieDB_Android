@@ -1,11 +1,13 @@
 package com.pointo.movies.ui.adapters
 
 import android.view.ViewGroup
-import android.widget.Toast
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView.NO_POSITION
 import com.pointo.movies.R
 import com.pointo.movies.data.models.Movie
 import com.pointo.movies.databinding.ItemMovieBinding
+import com.pointo.movies.ui.search.SearchFragmentDirections
 import com.skydoves.bindables.binding
 
 class MovieTitleAdapter : RecyclerView.Adapter<MovieTitleAdapter.MovieViewHolder>() {
@@ -17,7 +19,11 @@ class MovieTitleAdapter : RecyclerView.Adapter<MovieTitleAdapter.MovieViewHolder
             parent.binding<ItemMovieBinding>(R.layout.item_movie)
         return MovieViewHolder(binding).apply {
             binding.root.setOnClickListener {
-                Toast.makeText(it.context, "To be implemented!", Toast.LENGTH_SHORT).show()
+                val position = bindingAdapterPosition.takeIf { pos -> pos != NO_POSITION }
+                    ?: return@setOnClickListener
+                it.findNavController().navigate(
+                    SearchFragmentDirections.actionToDetailFragment(items[position])
+                )
             }
         }
     }

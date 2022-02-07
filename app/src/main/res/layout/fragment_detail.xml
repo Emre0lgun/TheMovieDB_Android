@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import
+            alias="R"
+            type="com.pointo.movies.R" />
+
+        <variable
+            name="viewModel"
+            type="com.pointo.movies.ui.detail.DetailViewModel" />
+
+        <variable
+            name="movie"
+            type="com.pointo.movies.data.responses.DetailResponse" />
+    </data>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/fragmentDetail_toolbar"
+                style="@style/Widget.MaterialComponents.Toolbar.Primary"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:menu="@menu/menu_detail"
+                app:navigationIcon="@drawable/ic_back"
+                app:title="Movie Detail" />
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/fragmentDetail_leftGuideline"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_begin="@dimen/paddingLarge"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/fragmentDetail_rightGuideline"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_end="@dimen/paddingLarge"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/fragmentDetail_ivPoster"
+                    imageUrl="@{viewModel.detailResponse.backdrop_path}"
+                    placeHolderDrawable="@{R.drawable.movie_placeholder}"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/detailPosterHeight"
+                    android:adjustViewBounds="true"
+                    android:scaleType="centerCrop"
+                    app:layout_constraintDimensionRatio="H,16:9"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:srcCompat="@drawable/movie_placeholder" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/fragmentDetail_tvMovieName"
+                    style="@style/DetailTextStyle"
+                    text="@{viewModel.movieModel.title}"
+                    android:layout_marginBottom="0dp"
+                    android:layout_width="0dp"
+                    android:maxLines="3"
+                    app:layout_constraintBottom_toTopOf="@id/fragmentDetail_tvAveragePoint"
+                    app:layout_constraintEnd_toEndOf="@id/fragmentDetail_rightGuideline"
+                    app:layout_constraintStart_toStartOf="@id/fragmentDetail_leftGuideline"
+                    tools:text="@string/dummy_movie_title" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/fragmentDetail_tvAveragePoint"
+                    style="@style/DetailTextStyle"
+                    text="@{String.valueOf(viewModel.detailResponse.vote_average)}"
+                    android:drawableStart="@drawable/ic_star"
+                    android:drawablePadding="@dimen/paddingSmall"
+                    android:padding="@dimen/paddingSmall"
+                    app:layout_constraintBottom_toBottomOf="@id/fragmentDetail_ivPoster"
+                    app:layout_constraintLeft_toLeftOf="@id/fragmentDetail_ivPoster"
+                    app:layout_constraintStart_toStartOf="@id/fragmentDetail_leftGuideline"
+                    tools:text="@string/dummy_movie_average_point" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/fragmentDetail_tvReleaseDate"
+                    style="@style/DetailTextStyle"
+                    formattedDate="@{String.valueOf(viewModel.detailResponse.release_date)}"
+                    app:layout_constraintBottom_toBottomOf="@id/fragmentDetail_ivPoster"
+                    app:layout_constraintEnd_toEndOf="@id/fragmentDetail_rightGuideline"
+                    app:layout_constraintRight_toRightOf="@id/fragmentDetail_ivPoster"
+                    tools:text="19.03.2021" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/fragmentDetail_tvOverview"
+                    textFirstLineMargin="@{viewModel.detailResponse.overview}"
+                    android:textStyle="bold"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/marginNormal"
+                    android:gravity="left"
+                    android:padding="@dimen/paddingSmall"
+                    android:textColor="@color/darkGray"
+                    android:textSize="@dimen/textSizeLarge"
+                    app:layout_constraintLeft_toLeftOf="@id/fragmentDetail_leftGuideline"
+                    app:layout_constraintRight_toRightOf="@id/fragmentDetail_rightGuideline"
+                    app:layout_constraintTop_toBottomOf="@id/fragmentDetail_ivPoster"
+                    tools:text="@string/dummy_movie_overview" />
+
+                <com.google.android.material.progressindicator.CircularProgressIndicator
+                    android:id="@+id/fragmentDetail_pbLoading"
+                    gone="@{!viewModel.loading}"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:indeterminate="true"
+                    app:indicatorColor="@color/colorAccent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </ScrollView>
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+
+</layout>
